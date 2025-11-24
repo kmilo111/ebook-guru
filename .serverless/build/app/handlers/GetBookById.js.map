@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../app/handlers/GetBookById.ts"],
+  "sourcesContent": ["export async function handler(event:any) {\n    console.log('object', event);\n    return {\n        statusCode:200,\n        body: JSON.stringify({message:'GetBookByid'})\n    }\n}"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,eAAsB,QAAQ,OAAW;AACrC,UAAQ,IAAI,UAAU,KAAK;AAC3B,SAAO;AAAA,IACH,YAAW;AAAA,IACX,MAAM,KAAK,UAAU,EAAC,SAAQ,cAAa,CAAC;AAAA,EAChD;AACJ;",
+  "names": []
+}

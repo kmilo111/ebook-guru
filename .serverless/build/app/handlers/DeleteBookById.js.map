@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../app/handlers/DeleteBookById.ts"],
+  "sourcesContent": ["export async function handler(event:any) {\n    console.log('object', event);\n    return {\n        statusCode:200,\n        body: JSON.stringify({message:'DeleteBookById'})\n    }\n}"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,eAAsB,QAAQ,OAAW;AACrC,UAAQ,IAAI,UAAU,KAAK;AAC3B,SAAO;AAAA,IACH,YAAW;AAAA,IACX,MAAM,KAAK,UAAU,EAAC,SAAQ,iBAAgB,CAAC;AAAA,EACnD;AACJ;",
+  "names": []
+}

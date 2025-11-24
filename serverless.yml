@@ -1,0 +1,54 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: kmilo111
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: ebook-guru
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: ebook-guru
+
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: us-east-1
+  stage: dev
+  
+
+functions:
+  getBooks:
+    handler: app/handlers/GetBooks.handler
+    description: Get all books from db
+    events:
+      - http:
+          path: /books
+          method: get
+  createBook:
+    handler: app/handlers/CreateBook.handler
+    description: Create new books in db
+    events:
+      - http:
+          path: /books
+          method: post
+  getBookById:
+    handler: app/handlers/GetBookById.handler
+    description: Get book in db by id
+    events:
+      - http:
+          path: /books/{bookId}
+          method: get
+  updateBookById:
+    handler: app/handlers/UpdateBookById.handler
+    description: Update book in db by id
+    events:
+      - http:
+          path: /books/{bookId}
+          method: put
+  deleteBookById:
+    handler: app/handlers/DeleteBookById.handler
+    description: delete book in db by id
+    events:
+      - http:
+          path: /books/{bookId}
+          method: delete
+plugins:
+  - serverless-offline
+

@@ -1,0 +1,1025 @@
+{
+  "service": {
+    "service": "ebook-guru",
+    "serviceObject": {
+      "name": "ebook-guru"
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs20.x",
+      "region": "us-east-1",
+      "stage": "dev",
+      "versionFunctions": true,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "GetBooksLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/ebook-guru-dev-getBooks"
+            }
+          },
+          "CreateBookLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/ebook-guru-dev-createBook"
+            }
+          },
+          "GetBookByIdLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/ebook-guru-dev-getBookById"
+            }
+          },
+          "UpdateBookByIdLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/ebook-guru-dev-updateBookById"
+            }
+          },
+          "DeleteBookByIdLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/ebook-guru-dev-deleteBookById"
+            }
+          },
+          "IamRoleLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "ebook-guru",
+                        "dev",
+                        "lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:CreateLogStream",
+                          "logs:CreateLogGroup",
+                          "logs:TagResource"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ebook-guru-dev*:*"
+                          }
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Action": [
+                          "logs:PutLogEvents"
+                        ],
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/ebook-guru-dev*:*:*"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ],
+              "Path": "/",
+              "RoleName": {
+                "Fn::Join": [
+                  "-",
+                  [
+                    "ebook-guru",
+                    "dev",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "lambdaRole"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetBooksLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
+                "S3Key": "serverless/ebook-guru/dev/1764027959553-2025-11-24T23:45:59.553Z/ebook-guru.zip"
+              },
+              "Handler": "app/handlers/GetBooks.handler",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "ebook-guru-dev-getBooks",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Description": "Get all books from db",
+              "Environment": {
+                "Variables": {
+                  "NODE_OPTIONS": "--enable-source-maps"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetBooksLogGroup"
+            ]
+          },
+          "CreateBookLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
+                "S3Key": "serverless/ebook-guru/dev/1764027959553-2025-11-24T23:45:59.553Z/ebook-guru.zip"
+              },
+              "Handler": "app/handlers/CreateBook.handler",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "ebook-guru-dev-createBook",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Description": "Create new books in db",
+              "Environment": {
+                "Variables": {
+                  "NODE_OPTIONS": "--enable-source-maps"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CreateBookLogGroup"
+            ]
+          },
+          "GetBookByIdLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
+                "S3Key": "serverless/ebook-guru/dev/1764027959553-2025-11-24T23:45:59.553Z/ebook-guru.zip"
+              },
+              "Handler": "app/handlers/GetBookById.handler",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "ebook-guru-dev-getBookById",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Description": "Get book in db by id",
+              "Environment": {
+                "Variables": {
+                  "NODE_OPTIONS": "--enable-source-maps"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetBookByIdLogGroup"
+            ]
+          },
+          "UpdateBookByIdLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
+                "S3Key": "serverless/ebook-guru/dev/1764027959553-2025-11-24T23:45:59.553Z/ebook-guru.zip"
+              },
+              "Handler": "app/handlers/UpdateBookById.handler",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "ebook-guru-dev-updateBookById",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Description": "Update book in db by id",
+              "Environment": {
+                "Variables": {
+                  "NODE_OPTIONS": "--enable-source-maps"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "UpdateBookByIdLogGroup"
+            ]
+          },
+          "DeleteBookByIdLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
+                "S3Key": "serverless/ebook-guru/dev/1764027959553-2025-11-24T23:45:59.553Z/ebook-guru.zip"
+              },
+              "Handler": "app/handlers/DeleteBookById.handler",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "ebook-guru-dev-deleteBookById",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Description": "delete book in db by id",
+              "Environment": {
+                "Variables": {
+                  "NODE_OPTIONS": "--enable-source-maps"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteBookByIdLogGroup"
+            ]
+          },
+          "GetBooksLambdaVersionnWLgGzbDGMNQ67sbG5EVelZbclEOi96xo359FBAANx0": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetBooksLambdaFunction"
+              },
+              "CodeSha256": "ttM7hFqqHlGAJC/ssu1imixIgxkgd9Lz0TEWvwc4k9E=",
+              "Description": "Get all books from db"
+            }
+          },
+          "CreateBookLambdaVersiony7P5SBh2zuR6qkl1VFZ72EMfc5kqku5LjPmgUeqHSc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateBookLambdaFunction"
+              },
+              "CodeSha256": "ttM7hFqqHlGAJC/ssu1imixIgxkgd9Lz0TEWvwc4k9E=",
+              "Description": "Create new books in db"
+            }
+          },
+          "GetBookByIdLambdaVersionT4Khy2ZAC04X4rTXnwqbsbss4Hn4v9VhjfsZ8R1OY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetBookByIdLambdaFunction"
+              },
+              "CodeSha256": "ttM7hFqqHlGAJC/ssu1imixIgxkgd9Lz0TEWvwc4k9E=",
+              "Description": "Get book in db by id"
+            }
+          },
+          "UpdateBookByIdLambdaVersionuUAUPVIvaP2lzA6ZkdgPdro191jHzcVrMmzzX0": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateBookByIdLambdaFunction"
+              },
+              "CodeSha256": "ttM7hFqqHlGAJC/ssu1imixIgxkgd9Lz0TEWvwc4k9E=",
+              "Description": "Update book in db by id"
+            }
+          },
+          "DeleteBookByIdLambdaVersion8HMYl5e5dYOPYdmqdB8xwmErzr0EodWIYwntiM7g": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteBookByIdLambdaFunction"
+              },
+              "CodeSha256": "ttM7hFqqHlGAJC/ssu1imixIgxkgd9Lz0TEWvwc4k9E=",
+              "Description": "delete book in db by id"
+            }
+          },
+          "ApiGatewayRestApi": {
+            "Type": "AWS::ApiGateway::RestApi",
+            "Properties": {
+              "Name": "dev-ebook-guru",
+              "EndpointConfiguration": {
+                "Types": [
+                  "EDGE"
+                ]
+              },
+              "Policy": ""
+            }
+          },
+          "ApiGatewayResourceBooks": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "books",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceBooksBookidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceBooks"
+              },
+              "PathPart": "{bookId}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodBooksGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceBooks"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetBooksLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetBooksLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodBooksPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceBooks"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "CreateBookLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "CreateBookLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodBooksBookidVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceBooksBookidVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetBookByIdLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetBookByIdLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodBooksBookidVarPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceBooksBookidVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "UpdateBookByIdLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "UpdateBookByIdLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodBooksBookidVarDelete": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "DELETE",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceBooksBookidVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "DeleteBookByIdLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "DeleteBookByIdLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1764027951631": {
+            "Type": "AWS::ApiGateway::Deployment",
+            "Properties": {
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "StageName": "dev"
+            },
+            "DependsOn": [
+              "ApiGatewayMethodBooksGet",
+              "ApiGatewayMethodBooksPost",
+              "ApiGatewayMethodBooksBookidVarGet",
+              "ApiGatewayMethodBooksBookidVarPut",
+              "ApiGatewayMethodBooksBookidVarDelete"
+            ]
+          },
+          "GetBooksLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetBooksLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "CreateBookLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateBookLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetBookByIdLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetBookByIdLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "UpdateBookByIdLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdateBookByIdLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "DeleteBookByIdLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteBookByIdLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
+            "Export": {
+              "Name": "sls-ebook-guru-dev-ServerlessDeploymentBucketName"
+            }
+          },
+          "GetBooksLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetBooksLambdaVersionnWLgGzbDGMNQ67sbG5EVelZbclEOi96xo359FBAANx0"
+            },
+            "Export": {
+              "Name": "sls-ebook-guru-dev-GetBooksLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateBookLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateBookLambdaVersiony7P5SBh2zuR6qkl1VFZ72EMfc5kqku5LjPmgUeqHSc"
+            },
+            "Export": {
+              "Name": "sls-ebook-guru-dev-CreateBookLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetBookByIdLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetBookByIdLambdaVersionT4Khy2ZAC04X4rTXnwqbsbss4Hn4v9VhjfsZ8R1OY"
+            },
+            "Export": {
+              "Name": "sls-ebook-guru-dev-GetBookByIdLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdateBookByIdLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateBookByIdLambdaVersionuUAUPVIvaP2lzA6ZkdgPdro191jHzcVrMmzzX0"
+            },
+            "Export": {
+              "Name": "sls-ebook-guru-dev-UpdateBookByIdLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteBookByIdLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteBookByIdLambdaVersion8HMYl5e5dYOPYdmqdB8xwmErzr0EodWIYwntiM7g"
+            },
+            "Export": {
+              "Name": "sls-ebook-guru-dev-DeleteBookByIdLambdaFunctionQualifiedArn"
+            }
+          },
+          "ServiceEndpoint": {
+            "Description": "URL of the service endpoint",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "https://",
+                  {
+                    "Ref": "ApiGatewayRestApi"
+                  },
+                  ".execute-api.",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix"
+                  },
+                  "/dev"
+                ]
+              ]
+            },
+            "Export": {
+              "Name": "sls-ebook-guru-dev-ServiceEndpoint"
+            }
+          }
+        }
+      },
+      "vpc": {}
+    },
+    "plugins": [
+      "serverless-offline"
+    ],
+    "pluginsData": {},
+    "functions": {
+      "getBooks": {
+        "handler": "app/handlers/GetBooks.handler",
+        "description": "Get all books from db",
+        "events": [
+          {
+            "http": {
+              "path": "books",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "ebook-guru-dev-getBooks",
+        "environment": {
+          "NODE_OPTIONS": "--enable-source-maps"
+        },
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetBooksLambdaVersionnWLgGzbDGMNQ67sbG5EVelZbclEOi96xo359FBAANx0"
+      },
+      "createBook": {
+        "handler": "app/handlers/CreateBook.handler",
+        "description": "Create new books in db",
+        "events": [
+          {
+            "http": {
+              "path": "books",
+              "method": "post",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "ebook-guru-dev-createBook",
+        "environment": {
+          "NODE_OPTIONS": "--enable-source-maps"
+        },
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "CreateBookLambdaVersiony7P5SBh2zuR6qkl1VFZ72EMfc5kqku5LjPmgUeqHSc"
+      },
+      "getBookById": {
+        "handler": "app/handlers/GetBookById.handler",
+        "description": "Get book in db by id",
+        "events": [
+          {
+            "http": {
+              "path": "books/{bookId}",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "ebook-guru-dev-getBookById",
+        "environment": {
+          "NODE_OPTIONS": "--enable-source-maps"
+        },
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "GetBookByIdLambdaVersionT4Khy2ZAC04X4rTXnwqbsbss4Hn4v9VhjfsZ8R1OY"
+      },
+      "updateBookById": {
+        "handler": "app/handlers/UpdateBookById.handler",
+        "description": "Update book in db by id",
+        "events": [
+          {
+            "http": {
+              "path": "books/{bookId}",
+              "method": "put",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "ebook-guru-dev-updateBookById",
+        "environment": {
+          "NODE_OPTIONS": "--enable-source-maps"
+        },
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "UpdateBookByIdLambdaVersionuUAUPVIvaP2lzA6ZkdgPdro191jHzcVrMmzzX0"
+      },
+      "deleteBookById": {
+        "handler": "app/handlers/DeleteBookById.handler",
+        "description": "delete book in db by id",
+        "events": [
+          {
+            "http": {
+              "path": "books/{bookId}",
+              "method": "delete",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "ebook-guru-dev-deleteBookById",
+        "environment": {
+          "NODE_OPTIONS": "--enable-source-maps"
+        },
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteBookByIdLambdaVersion8HMYl5e5dYOPYdmqdB8xwmErzr0EodWIYwntiM7g"
+      }
+    },
+    "configValidationMode": "warn",
+    "serviceFilename": "serverless",
+    "initialServerlessConfig": {
+      "org": "kmilo111",
+      "app": "ebook-guru",
+      "service": "ebook-guru",
+      "provider": {
+        "$ref": "$[\"service\"][\"provider\"]"
+      },
+      "functions": {
+        "$ref": "$[\"service\"][\"functions\"]"
+      },
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
+      }
+    },
+    "app": "ebook-guru",
+    "appId": null,
+    "org": "kmilo111",
+    "orgId": null,
+    "layers": {}
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/ebook-guru/dev/1764027959553-2025-11-24T23:45:59.553Z",
+    "artifact": "ebook-guru.zip"
+  }
+}
