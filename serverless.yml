@@ -11,8 +11,20 @@ provider:
   runtime: nodejs20.x
   region: us-east-1
   stage: dev
-  
-
+  memorySize: 128
+  timeout: 10
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Resource: "*"
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
 functions:
   getBooks:
     handler: app/handlers/GetBooks.handler
@@ -52,3 +64,22 @@ functions:
 plugins:
   - serverless-offline
 
+resources:
+  Resources:
+    BooksDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: BooksTable
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
