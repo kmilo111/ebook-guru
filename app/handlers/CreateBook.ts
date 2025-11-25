@@ -30,7 +30,7 @@ export async function handler(event:any) {
         const instance = new CreateBookHandler(bookModelInstance);
         return await instance.processEvent(event)    
     } catch (error) {
-        console.error("Create book handler error", error);
+        console.error("Create book handler error..!", error);
 
         return {
             statusCode:500,
