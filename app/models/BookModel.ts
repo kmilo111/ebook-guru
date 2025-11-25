@@ -35,3 +35,18 @@ export function getBooksModel(){
     const bookRepositoryInstance = createBookRepository();
     return new BookModel(bookRepositoryInstance);
 }
+
+export function getBookByIdModel(){
+    const bookRepositoryInstance = createBookRepository();
+    return new BookModel(bookRepositoryInstance);
+}
+
+export function updateBookModel(){
+    const bookRepositoryInstance = createBookRepository();
+    return new BookModel(bookRepositoryInstance);
+}
+
+export function deleteBookModel(){
+    const bookRepositoryInstance = createBookRepository();
+    return new BookModel(bookRepositoryInstance);
+}
