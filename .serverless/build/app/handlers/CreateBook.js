@@ -12772,6 +12772,43 @@ var BookRepository = class {
     await this.dbClient.send(command);
     return { id, title: bookData.title || "" };
   }
+  async getBookById(id) {
+    const command = new import_lib_dynamodb2.GetCommand({
+      TableName: "BooksTable",
+      Key: { PK: "Book", SK: `Book#${id}` }
+    });
+    const result = await this.dbClient.send(command);
+    return result.Item ? { id, title: result.Item.title } : void 0;
+  }
+  async getAllBooks() {
+    const command = new import_lib_dynamodb2.QueryCommand({
+      TableName: "BooksTable",
+      KeyConditionExpression: "PK = :pk AND begins_with(SK, :sk)",
+      ExpressionAttributeValues: {
+        ":pk": "Book",
+        ":sk": "Book#"
+      }
+    });
+    const result = await this.dbClient.send(command);
+    return result.Items ?? [];
+  }
+  async deleteBookById(id) {
+    const command = new import_lib_dynamodb2.DeleteCommand({
+      TableName: "BooksTable",
+      Key: { PK: "Book", SK: `Book#${id}` }
+    });
+    await this.dbClient.send(command);
+  }
+  async updateBookById(id, bookData) {
+    const command = new import_lib_dynamodb2.UpdateCommand({
+      TableName: "BooksTable",
+      Key: { PK: "Book", SK: `Book#${id}` },
+      ExpressionAttributeNames: { "#title": "title" },
+      UpdateExpression: "SET #title = :title"
+    });
+    await this.dbClient.send(command);
+    return { id, title: bookData.title || "" };
+  }
 };
 function createBookRepository() {
   const dbClient = createDynamoDBClient();
@@ -12785,6 +12822,12 @@ var BookModel = class {
   }
   async createBook(bookData) {
     return this.bookRepositoryInstanace.saveBook(bookData);
+  }
+  async getAllBooks() {
+    return this.bookRepositoryInstanace.getAllBooks();
+  }
+  async updateBookById(id, bookData) {
+    return this.bookRepositoryInstanace.updateBookById(id, bookData);
   }
 };
 function createBookModel() {
