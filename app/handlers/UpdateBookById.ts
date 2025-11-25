@@ -3,7 +3,7 @@ import { BookModel, updateBookModel } from "../models/BookModel";
 class UpdateBookById {
     constructor(private readonly bookModel: BookModel) {}
     async processEvent(event:any) {
-        const bookId = event.pathParameters.id;
+        const bookId = event.pathParameters.bookId;
         const bookData = JSON.parse(event.body);
         const updatedBook = await this.bookModel.updateBookById(bookId, bookData);
         return {

@@ -25,6 +25,7 @@ export class BookRepository {
     }
 
     async getBookById(id: string): Promise<Book | undefined> {
+        console.log(id);
         const command =  new GetCommand({
             TableName: "BooksTable",
             Key: { PK: 'Book', SK: `Book#${id}` }
@@ -61,8 +62,8 @@ export class BookRepository {
         const command = new UpdateCommand({
             TableName: "BooksTable",
             Key: { PK: 'Book', SK: `Book#${id}` },
-            ExpressionAttributeNames: {"#title": "title" },
-            UpdateExpression: "SET #title = :title",
+            ExpressionAttributeValues: { ":title": bookData.title },
+            UpdateExpression: "SET title = :title",
         });
         await this.dbClient.send(command);
         return { id, title: bookData.title || "" };

@@ -106,6 +106,7 @@ var BookRepository = class {
     return { id, title: bookData.title || "" };
   }
   async getBookById(id) {
+    console.log(id);
     const command = new import_lib_dynamodb2.GetCommand({
       TableName: "BooksTable",
       Key: { PK: "Book", SK: `Book#${id}` }
@@ -136,8 +137,8 @@ var BookRepository = class {
     const command = new import_lib_dynamodb2.UpdateCommand({
       TableName: "BooksTable",
       Key: { PK: "Book", SK: `Book#${id}` },
-      ExpressionAttributeNames: { "#title": "title" },
-      UpdateExpression: "SET #title = :title"
+      ExpressionAttributeValues: { ":title": bookData.title },
+      UpdateExpression: "SET title = :title"
     });
     await this.dbClient.send(command);
     return { id, title: bookData.title || "" };
@@ -159,8 +160,14 @@ var BookModel = class {
   async getAllBooks() {
     return this.bookRepositoryInstanace.getAllBooks();
   }
+  async getBookById(id) {
+    return this.bookRepositoryInstanace.getBookById(id);
+  }
   async updateBookById(id, bookData) {
     return this.bookRepositoryInstanace.updateBookById(id, bookData);
+  }
+  async deleteBookById(id) {
+    return this.bookRepositoryInstanace.deleteBookById(id);
   }
 };
 function getBooksModel() {

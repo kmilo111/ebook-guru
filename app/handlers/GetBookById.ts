@@ -3,7 +3,7 @@ import { BookModel, getBookByIdModel } from "../models/BookModel";
 class GetBookById {
     constructor(private readonly bookModel: BookModel) {}
     async processEvent(event:any) {
-        const bookId = event.pathParameters.id;
+        const bookId = event.pathParameters.bookId;
         const book = await this.bookModel.getBookById(bookId);
         return {
             statusCode:200,

@@ -150,7 +150,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
-                "S3Key": "serverless/ebook-guru/dev/1764078101566-2025-11-25T13:41:41.566Z/ebook-guru.zip"
+                "S3Key": "serverless/ebook-guru/dev/1764081809385-2025-11-25T14:43:29.385Z/ebook-guru.zip"
               },
               "Handler": "app/handlers/GetBooks.handler",
               "Runtime": "nodejs20.x",
@@ -179,7 +179,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
-                "S3Key": "serverless/ebook-guru/dev/1764078101566-2025-11-25T13:41:41.566Z/ebook-guru.zip"
+                "S3Key": "serverless/ebook-guru/dev/1764081809385-2025-11-25T14:43:29.385Z/ebook-guru.zip"
               },
               "Handler": "app/handlers/CreateBook.handler",
               "Runtime": "nodejs20.x",
@@ -208,7 +208,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
-                "S3Key": "serverless/ebook-guru/dev/1764078101566-2025-11-25T13:41:41.566Z/ebook-guru.zip"
+                "S3Key": "serverless/ebook-guru/dev/1764081809385-2025-11-25T14:43:29.385Z/ebook-guru.zip"
               },
               "Handler": "app/handlers/GetBookById.handler",
               "Runtime": "nodejs20.x",
@@ -237,7 +237,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
-                "S3Key": "serverless/ebook-guru/dev/1764078101566-2025-11-25T13:41:41.566Z/ebook-guru.zip"
+                "S3Key": "serverless/ebook-guru/dev/1764081809385-2025-11-25T14:43:29.385Z/ebook-guru.zip"
               },
               "Handler": "app/handlers/UpdateBookById.handler",
               "Runtime": "nodejs20.x",
@@ -266,7 +266,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-us-east-1-f6c092a3-d8be",
-                "S3Key": "serverless/ebook-guru/dev/1764078101566-2025-11-25T13:41:41.566Z/ebook-guru.zip"
+                "S3Key": "serverless/ebook-guru/dev/1764081809385-2025-11-25T14:43:29.385Z/ebook-guru.zip"
               },
               "Handler": "app/handlers/DeleteBookById.handler",
               "Runtime": "nodejs20.x",
@@ -290,58 +290,58 @@
               "DeleteBookByIdLogGroup"
             ]
           },
-          "GetBooksLambdaVersionFJSQmYSKDNR9zOEZQSYWEuOHGFnuGbelZjGIcA8HwKM": {
+          "GetBooksLambdaVersionaJX4REEjbzV97MaMkhxG5DoMBdi2kVaQjSNbe37chM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetBooksLambdaFunction"
               },
-              "CodeSha256": "RtM2IzTMw+8E1v3olHF8C0gd4vHX8N+f6jP0OI+KZjc=",
+              "CodeSha256": "ANsw2+ZvkZixJm5kWN1asIvCkk5x3bNrpdLOfA5UsAs=",
               "Description": "Get all books from db"
             }
           },
-          "CreateBookLambdaVersionStKyuESuZFaJA2Vu8iHl6yl1JaZL86bnclTjUT2eg": {
+          "CreateBookLambdaVersionagwoaUjeRIk47FHdulyj9o1GQxgDfvZ50n1WMeIUEY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateBookLambdaFunction"
               },
-              "CodeSha256": "RtM2IzTMw+8E1v3olHF8C0gd4vHX8N+f6jP0OI+KZjc=",
+              "CodeSha256": "ANsw2+ZvkZixJm5kWN1asIvCkk5x3bNrpdLOfA5UsAs=",
               "Description": "Create new books in db"
             }
           },
-          "GetBookByIdLambdaVersionQR7EZpWZ1yl1k8xTMS2b0e5Ur41prTGykwKsjJfzs": {
+          "GetBookByIdLambdaVersionKsn3hVGuX0mEfPjVUCTrIq38DXCljVqD4YKZZUqEmE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetBookByIdLambdaFunction"
               },
-              "CodeSha256": "RtM2IzTMw+8E1v3olHF8C0gd4vHX8N+f6jP0OI+KZjc=",
+              "CodeSha256": "ANsw2+ZvkZixJm5kWN1asIvCkk5x3bNrpdLOfA5UsAs=",
               "Description": "Get book in db by id"
             }
           },
-          "UpdateBookByIdLambdaVersionYcaet658uqpAdRFvbSjAfMXNKNsnnpGm614CYxEO7s": {
+          "UpdateBookByIdLambdaVersion4X309AOvLcwco07uVWH1U3gVQ49DVMfcAB3XwVBB4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateBookByIdLambdaFunction"
               },
-              "CodeSha256": "RtM2IzTMw+8E1v3olHF8C0gd4vHX8N+f6jP0OI+KZjc=",
+              "CodeSha256": "ANsw2+ZvkZixJm5kWN1asIvCkk5x3bNrpdLOfA5UsAs=",
               "Description": "Update book in db by id"
             }
           },
-          "DeleteBookByIdLambdaVersionBkfanYjygdytVtSOSCnjUCRg2UsG2SEH8ALomacrTEM": {
+          "DeleteBookByIdLambdaVersionaKehqx3aOsKhK7VDU8iSqmYePGQOquIesiCODQw5c": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteBookByIdLambdaFunction"
               },
-              "CodeSha256": "RtM2IzTMw+8E1v3olHF8C0gd4vHX8N+f6jP0OI+KZjc=",
+              "CodeSha256": "ANsw2+ZvkZixJm5kWN1asIvCkk5x3bNrpdLOfA5UsAs=",
               "Description": "delete book in db by id"
             }
           },
@@ -614,7 +614,7 @@
               "DeleteBookByIdLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1764078094461": {
+          "ApiGatewayDeployment1764081799485": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -856,7 +856,7 @@
           "GetBooksLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetBooksLambdaVersionFJSQmYSKDNR9zOEZQSYWEuOHGFnuGbelZjGIcA8HwKM"
+              "Ref": "GetBooksLambdaVersionaJX4REEjbzV97MaMkhxG5DoMBdi2kVaQjSNbe37chM"
             },
             "Export": {
               "Name": "sls-ebook-guru-dev-GetBooksLambdaFunctionQualifiedArn"
@@ -865,7 +865,7 @@
           "CreateBookLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateBookLambdaVersionStKyuESuZFaJA2Vu8iHl6yl1JaZL86bnclTjUT2eg"
+              "Ref": "CreateBookLambdaVersionagwoaUjeRIk47FHdulyj9o1GQxgDfvZ50n1WMeIUEY"
             },
             "Export": {
               "Name": "sls-ebook-guru-dev-CreateBookLambdaFunctionQualifiedArn"
@@ -874,7 +874,7 @@
           "GetBookByIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetBookByIdLambdaVersionQR7EZpWZ1yl1k8xTMS2b0e5Ur41prTGykwKsjJfzs"
+              "Ref": "GetBookByIdLambdaVersionKsn3hVGuX0mEfPjVUCTrIq38DXCljVqD4YKZZUqEmE"
             },
             "Export": {
               "Name": "sls-ebook-guru-dev-GetBookByIdLambdaFunctionQualifiedArn"
@@ -883,7 +883,7 @@
           "UpdateBookByIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateBookByIdLambdaVersionYcaet658uqpAdRFvbSjAfMXNKNsnnpGm614CYxEO7s"
+              "Ref": "UpdateBookByIdLambdaVersion4X309AOvLcwco07uVWH1U3gVQ49DVMfcAB3XwVBB4"
             },
             "Export": {
               "Name": "sls-ebook-guru-dev-UpdateBookByIdLambdaFunctionQualifiedArn"
@@ -892,7 +892,7 @@
           "DeleteBookByIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteBookByIdLambdaVersionBkfanYjygdytVtSOSCnjUCRg2UsG2SEH8ALomacrTEM"
+              "Ref": "DeleteBookByIdLambdaVersionaKehqx3aOsKhK7VDU8iSqmYePGQOquIesiCODQw5c"
             },
             "Export": {
               "Name": "sls-ebook-guru-dev-DeleteBookByIdLambdaFunctionQualifiedArn"
@@ -954,7 +954,7 @@
         "timeout": 10,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "GetBooksLambdaVersionFJSQmYSKDNR9zOEZQSYWEuOHGFnuGbelZjGIcA8HwKM"
+        "versionLogicalId": "GetBooksLambdaVersionaJX4REEjbzV97MaMkhxG5DoMBdi2kVaQjSNbe37chM"
       },
       "createBook": {
         "handler": "app/handlers/CreateBook.handler",
@@ -977,7 +977,7 @@
         "timeout": 10,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "CreateBookLambdaVersionStKyuESuZFaJA2Vu8iHl6yl1JaZL86bnclTjUT2eg"
+        "versionLogicalId": "CreateBookLambdaVersionagwoaUjeRIk47FHdulyj9o1GQxgDfvZ50n1WMeIUEY"
       },
       "getBookById": {
         "handler": "app/handlers/GetBookById.handler",
@@ -1000,7 +1000,7 @@
         "timeout": 10,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "GetBookByIdLambdaVersionQR7EZpWZ1yl1k8xTMS2b0e5Ur41prTGykwKsjJfzs"
+        "versionLogicalId": "GetBookByIdLambdaVersionKsn3hVGuX0mEfPjVUCTrIq38DXCljVqD4YKZZUqEmE"
       },
       "updateBookById": {
         "handler": "app/handlers/UpdateBookById.handler",
@@ -1023,7 +1023,7 @@
         "timeout": 10,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "UpdateBookByIdLambdaVersionYcaet658uqpAdRFvbSjAfMXNKNsnnpGm614CYxEO7s"
+        "versionLogicalId": "UpdateBookByIdLambdaVersion4X309AOvLcwco07uVWH1U3gVQ49DVMfcAB3XwVBB4"
       },
       "deleteBookById": {
         "handler": "app/handlers/DeleteBookById.handler",
@@ -1046,7 +1046,7 @@
         "timeout": 10,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "DeleteBookByIdLambdaVersionBkfanYjygdytVtSOSCnjUCRg2UsG2SEH8ALomacrTEM"
+        "versionLogicalId": "DeleteBookByIdLambdaVersionaKehqx3aOsKhK7VDU8iSqmYePGQOquIesiCODQw5c"
       }
     },
     "resources": {
@@ -1110,7 +1110,7 @@
     "layers": {}
   },
   "package": {
-    "artifactDirectoryName": "serverless/ebook-guru/dev/1764078101566-2025-11-25T13:41:41.566Z",
+    "artifactDirectoryName": "serverless/ebook-guru/dev/1764081809385-2025-11-25T14:43:29.385Z",
     "artifact": "ebook-guru.zip"
   }
 }
