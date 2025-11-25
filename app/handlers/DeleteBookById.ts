@@ -3,7 +3,7 @@ import { BookModel, deleteBookModel } from "../models/BookModel";
 class DeleteBookById {
     constructor(private readonly bookModel: BookModel) {}
     async processEvent(event:any) {
-        const bookId = event.pathParameters.id;
+        const bookId = event.pathParameters.bookId;
         await this.bookModel.deleteBookById(bookId);
         return {
             statusCode:200,

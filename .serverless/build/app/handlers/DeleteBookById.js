@@ -181,7 +181,7 @@ var DeleteBookById = class {
     this.bookModel = bookModel;
   }
   async processEvent(event) {
-    const bookId = event.pathParameters.id;
+    const bookId = event.pathParameters.bookId;
     await this.bookModel.deleteBookById(bookId);
     return {
       statusCode: 200,
