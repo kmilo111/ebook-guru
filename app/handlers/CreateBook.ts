@@ -35,7 +35,7 @@ export async function handler(event:any) {
         return {
             statusCode:500,
             body: JSON.stringify({
-                error:"Something went wrong check you logs"
+                error:"Something went wrong check you logs..!!!"
             })
         }
     }
